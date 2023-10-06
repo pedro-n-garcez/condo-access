@@ -4,8 +4,6 @@ import {
     Column,
     ManyToOne,
     JoinColumn,
-    CreateDateColumn, 
-    UpdateDateColumn 
 } from 'typeorm';
 
 import Condominio from '../../../../modules/condominios/typeorm/entities/Condominio';
@@ -21,12 +19,6 @@ import Condominio from '../../../../modules/condominios/typeorm/entities/Condomi
     @ManyToOne(() => Condominio)
     @JoinColumn({ name: 'condominio_id' })
     condominio: Condominio;
-
-    @CreateDateColumn()
-    created_at: Date;
-
-    @UpdateDateColumn()
-    updated_at: Date;
   }
   
   export default Unidade;

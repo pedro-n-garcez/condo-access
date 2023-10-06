@@ -1,4 +1,9 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { 
+  MigrationInterface, 
+  QueryRunner, 
+  Table, 
+  TableForeignKey 
+} from "typeorm";
 
 export class CreateUnidades1696541052433 implements MigrationInterface {
 
@@ -19,21 +24,26 @@ export class CreateUnidades1696541052433 implements MigrationInterface {
                   type: 'varchar',
                 },
                 {
-                  name: 'created_at',
-                  type: 'timestamp with time zone',
-                  default: 'now()',
-                },
-                {
-                  name: 'updated_at',
-                  type: 'timestamp with time zone',
-                  default: 'now()',
-                },
+                  name: 'condominio_id',
+                  type: 'int'
+                }
               ],
             }),
-          );
+      );
+
+      await queryRunner.createForeignKey(
+        'unidades',
+        new TableForeignKey({
+            columnNames: ['condominio_id'],
+            referencedColumnNames: ['id'],
+            referencedTableName: 'condominios',
+            onDelete: "CASCADE",
+        }),
+    );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('unidades');
+      await queryRunner.dropForeignKey('unidades', 'condominios');
+      await queryRunner.dropTable('unidades');
     }
 }

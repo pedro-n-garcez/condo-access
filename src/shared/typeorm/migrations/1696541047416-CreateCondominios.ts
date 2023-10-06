@@ -18,16 +18,6 @@ export class CreateCondominios1696541047416 implements MigrationInterface {
                   name: 'name',
                   type: 'varchar',
                 },
-                {
-                  name: 'created_at',
-                  type: 'timestamp with time zone',
-                  default: 'now()',
-                },
-                {
-                  name: 'updated_at',
-                  type: 'timestamp with time zone',
-                  default: 'now()',
-                },
               ],
             }),
           );
