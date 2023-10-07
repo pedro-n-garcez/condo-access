@@ -2,6 +2,7 @@ import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
 import Visitante from '../typeorm/entities/Visitante';
 import VisitanteRepository from '../typeorm/repositories/VisitantesRepository';
+import cleanRg from '@shared/utils/CleanRg';
 
 interface IRequest {
   id: string;
@@ -18,19 +19,16 @@ class UpdateVisitanteService {
       throw new AppError('Visitante nao encontrado');
     }
 
-    let cleanRg: string = rg;
-    if(rg.includes('-') || rg.includes('.')){
-        cleanRg = rg.replace(/[.-]/g, '');
-    }
+    let newRg: string = cleanRg(rg);
 
-    const visitanteExists = await visitantesRepository.findByRg(cleanRg);
+    const visitanteExists = await visitantesRepository.findByRg(newRg);
 
-    if (visitanteExists && cleanRg != visitante.rg) {
+    if (visitanteExists && newRg != visitante.rg) {
       throw new AppError('Ja existe um visitante com o RG fornecido');
     }
 
     visitante.nome_completo = nome_completo;
-    visitante.rg = cleanRg;
+    visitante.rg = newRg;
 
     await visitantesRepository.save(visitante);
 

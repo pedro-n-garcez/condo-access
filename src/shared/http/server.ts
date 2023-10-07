@@ -29,7 +29,7 @@ app.use(
 
         return res.status(500).json({
             status: 'error',
-            message: 'internal server error',
+            message: error.message,
         });
 });
 
