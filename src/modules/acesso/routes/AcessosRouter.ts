@@ -5,6 +5,8 @@ import { celebrate, Joi, Segments } from 'celebrate';
 const acessosRouter = Router();
 const acessosController = new AcessosController();
 
+acessosRouter.get('/', acessosController.index);
+
 acessosRouter.post(
     '/entrada',
     celebrate({

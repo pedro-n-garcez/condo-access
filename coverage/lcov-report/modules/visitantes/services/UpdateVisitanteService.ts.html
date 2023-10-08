@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for modules/visitantes/services/CreateVisitanteService.ts</title>
+    <title>Code coverage report for modules/visitantes/services/UpdateVisitanteService.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">modules/visitantes/services</a> CreateVisitanteService.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">modules/visitantes/services</a> UpdateVisitanteService.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.71% </span>
+                <span class="strong">43.58% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/35</span>
+                <span class='fraction'>17/39</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.71% </span>
+                <span class="strong">43.58% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/35</span>
+                <span class='fraction'>17/39</span>
             </div>
         
             
@@ -97,7 +97,11 @@
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -110,6 +114,10 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -138,26 +146,30 @@ import VisitanteRepository from '../typeorm/repositories/VisitantesRepository';
 import cleanRg from '@shared/utils/CleanRg';
 &nbsp;
 interface IRequest {
+  id: string;
   nome_completo: string;
   rg: string;
 }
 &nbsp;
-class CreateVisitanteService {
-  public async <span class="fstat-no" title="function not covered" >execute({ nome_completo, rg }: IRequest): Promise&lt;Visitante&gt; {</span>
+class UpdateVisitanteService {
+  public async <span class="fstat-no" title="function not covered" >execute({ id, nome_completo, rg }: IRequest): Promise&lt;Visitante&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    const visitantesRepository = getCustomRepository(VisitanteRepository);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    const visitante = await visitantesRepository.findOne(id);</span>
+<span class="cstat-no" title="statement not covered" >    if(!visitante){</span>
+<span class="cstat-no" title="statement not covered" >      throw new AppError('Visitante nao encontrado');</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    let newRg: string = cleanRg(rg);</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    const visitanteExists = await visitantesRepository.findByRg(newRg);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    if (visitanteExists) {</span>
+<span class="cstat-no" title="statement not covered" >    if (visitanteExists &amp;&amp; newRg != visitante.rg) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new AppError('Ja existe um visitante com o RG fornecido');</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    const visitante = visitantesRepository.create({ </span>
-<span class="cstat-no" title="statement not covered" >        nome_completo,</span>
-<span class="cstat-no" title="statement not covered" >        rg: newRg</span>
-<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >    visitante.nome_completo = nome_completo;</span>
+<span class="cstat-no" title="statement not covered" >    visitante.rg = newRg;</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    await visitantesRepository.save(visitante);</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -165,7 +177,7 @@ class CreateVisitanteService {
 <span class="cstat-no" title="statement not covered" >  }</span>
 }
 &nbsp;
-export default CreateVisitanteService;</pre></td></tr></table></pre>
+export default UpdateVisitanteService;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

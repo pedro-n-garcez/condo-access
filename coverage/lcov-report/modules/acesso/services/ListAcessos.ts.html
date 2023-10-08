@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for modules/visitantes/services/CreateVisitanteService.ts</title>
+    <title>Code coverage report for modules/acesso/services/ListAcessos.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">modules/visitantes/services</a> CreateVisitanteService.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">modules/acesso/services</a> ListAcessos.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.71% </span>
+                <span class="strong">45% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/35</span>
+                <span class='fraction'>9/20</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.71% </span>
+                <span class="strong">45% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/35</span>
+                <span class='fraction'>9/20</span>
             </div>
         
             
@@ -82,29 +82,7 @@
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a>
-<a name='L21'></a><a href='#L21'>21</a>
-<a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -121,51 +99,28 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import AppError from '@shared/errors/AppError';
-import { getCustomRepository } from 'typeorm';
-import Visitante from '../typeorm/entities/Visitante';
-import VisitanteRepository from '../typeorm/repositories/VisitantesRepository';
-import cleanRg from '@shared/utils/CleanRg';
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { getCustomRepository } from 'typeorm';
+import Acesso from '../typeorm/entities/Acesso';
+import AcessoRepository from '../typeorm/repositories/AcessosRepository';
 &nbsp;
-interface IRequest {
-  nome_completo: string;
-  rg: string;
-}
-&nbsp;
-class CreateVisitanteService {
-  public async <span class="fstat-no" title="function not covered" >execute({ nome_completo, rg }: IRequest): Promise&lt;Visitante&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const visitantesRepository = getCustomRepository(VisitanteRepository);</span>
+class ListAcessosService {
+  public async <span class="fstat-no" title="function not covered" >execute(): Promise&lt;Acesso[]&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const acessosRepository = getCustomRepository(AcessoRepository);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    let newRg: string = cleanRg(rg);</span>
+<span class="cstat-no" title="statement not covered" >    const acessos = await acessosRepository</span>
+<span class="cstat-no" title="statement not covered" >      .createQueryBuilder("acessos")</span>
+<span class="cstat-no" title="statement not covered" >      .leftJoinAndSelect("acessos.visitante","visitantes")</span>
+<span class="cstat-no" title="statement not covered" >      .leftJoinAndSelect("acessos.condominio","condominios")</span>
+<span class="cstat-no" title="statement not covered" >      .leftJoinAndSelect("acessos.unidade","unidades")</span>
+<span class="cstat-no" title="statement not covered" >      .getMany();</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    const visitanteExists = await visitantesRepository.findByRg(newRg);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    if (visitanteExists) {</span>
-<span class="cstat-no" title="statement not covered" >      throw new AppError('Ja existe um visitante com o RG fornecido');</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    const visitante = visitantesRepository.create({ </span>
-<span class="cstat-no" title="statement not covered" >        nome_completo,</span>
-<span class="cstat-no" title="statement not covered" >        rg: newRg</span>
-<span class="cstat-no" title="statement not covered" >    });</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    await visitantesRepository.save(visitante);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    return visitante;</span>
+<span class="cstat-no" title="statement not covered" >    return acessos;</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 }
 &nbsp;
-export default CreateVisitanteService;</pre></td></tr></table></pre>
+export default ListAcessosService;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
