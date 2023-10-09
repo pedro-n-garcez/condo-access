@@ -1,4 +1,4 @@
+.docker/dbdata
 node_modules/
 build/
-.env
 dist

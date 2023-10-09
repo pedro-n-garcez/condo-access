@@ -13,12 +13,15 @@ describe('AcessosController', () => {
   let mockReq: Partial<Request>;
   let mockRes: Partial<Response>;
   let mockJson: jest.Mock;
+  let mockStatus: jest.Mock;
 
   beforeEach(() => {
     acessosController = new AcessosController();
     mockJson = jest.fn();
+    mockStatus = jest.fn().mockReturnThis();
     mockReq = {};
     mockRes = {
+      status: mockStatus,
       json: mockJson,
     };
   });
@@ -28,7 +31,7 @@ describe('AcessosController', () => {
   });
 
   describe('index', () => {
-    it('should return a json response with acessos', async () => {
+    it('should return a json response with accesses', async () => {
       const mockAcessos = [{ 
         id: "47cfd7e9-31c9-4eab-9a15-2381e459e9fc",
         ja_saiu: false,
@@ -59,7 +62,7 @@ describe('AcessosController', () => {
   });
 
   describe('create', () => {
-    it('should return a json response with the created acesso', async () => {
+    it('should return a json response with the created access', async () => {
       const mockBody = { rg: '223334445', unidade_id: '2', condominio_id: '1' };
       const mockAcesso = { 
         id: "47cfd7e9-31c9-4eab-9a15-2381e459e9fc",
@@ -87,12 +90,13 @@ describe('AcessosController', () => {
 
       await acessosController.create(mockReq as Request, mockRes as Response);
 
+      expect(mockStatus).toHaveBeenCalledWith(201);
       expect(mockJson).toHaveBeenCalledWith(mockAcesso);
     });
   });
 
-  describe('registrarSaida', () => {
-    it('should return a json response with the registered saida acesso', async () => {
+  describe('registerSaida', () => {
+    it('should return a json response with the exit date and time and ja_saiu as true', async () => {
       const mockParams = { id: '47cfd7e9-31c9-4eab-9a15-2381e459e9fc' };
       const mockAcesso = { 
         id: "47cfd7e9-31c9-4eab-9a15-2381e459e9fc",

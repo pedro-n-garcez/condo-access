@@ -26,7 +26,7 @@ class VisitantesController {
         const createVisitante = new CreateVisitanteService();
         const visitante = await createVisitante.execute({ nome_completo, rg });
 
-        return res.json(visitante);
+        return res.status(201).json(visitante);
     }
 
     public async update(req: Request, res: Response): Promise<Response> {

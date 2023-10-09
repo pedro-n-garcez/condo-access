@@ -17,7 +17,7 @@ class AcessosController {
         const createAcesso = new CreateAcessoService();
         const acesso = await createAcesso.execute({ rg, unidade_id, condominio_id });
 
-        return res.json(acesso);
+        return res.status(201).json(acesso);
     }
 
     public async registrarSaida(req: Request, res: Response): Promise<Response> {

@@ -17,12 +17,15 @@ describe('VisitantesController', () => {
   let mockReq: Partial<Request>;
   let mockRes: Partial<Response>;
   let mockJson: jest.Mock;
+  let mockStatus: jest.Mock;
 
   beforeEach(() => {
     visitantesController = new VisitantesController();
+    mockStatus = jest.fn().mockReturnThis();
     mockJson = jest.fn();
     mockReq = {};
     mockRes = {
+      status: mockStatus,
       json: mockJson,
     };
   });
@@ -34,11 +37,11 @@ describe('VisitantesController', () => {
   describe('index', () => {
     it('should return a json response with visitantes', async () => {
       const mockVisitantes = [{ 
-		id: "4b084ce6-a1c0-46fb-b233-f3621caee577",
-		nome_completo: "Joao da Silva",
-		rg: "112223334",
-		created_at: "2023-10-07T15:39:29.849Z",
-		updated_at: "2023-10-07T15:39:29.849Z"
+        id: "4b084ce6-a1c0-46fb-b233-f3621caee577",
+        nome_completo: "Joao da Silva",
+        rg: "112223334",
+        created_at: "2023-10-07T15:39:29.849Z",
+        updated_at: "2023-10-07T15:39:29.849Z"
       }];
       (ListVisitanteService.prototype.execute as jest.Mock).mockResolvedValueOnce(mockVisitantes);
 
@@ -52,10 +55,10 @@ describe('VisitantesController', () => {
     it('should return a json response with visitante', async () => {
       const mockVisitante = {
         id: "4b084ce6-a1c0-46fb-b233-f3621caee577", 
-		nome_completo: "Joao da Silva",
-		rg: "112223334",
-		created_at: "2023-10-07T15:39:29.849Z",
-		updated_at: "2023-10-07T15:39:29.849Z"
+		    nome_completo: "Joao da Silva",
+		    rg: "112223334",
+		    created_at: "2023-10-07T15:39:29.849Z",
+		    updated_at: "2023-10-07T15:39:29.849Z"
       };
       const mockParams = { id: '4b084ce6-a1c0-46fb-b233-f3621caee577' };
       (ShowVisitanteService.prototype.execute as jest.Mock).mockResolvedValueOnce(mockVisitante);
@@ -68,13 +71,13 @@ describe('VisitantesController', () => {
   });
 
   describe('create', () => {
-    it('should return a json response with created visitante', async () => {
+    it('should return a json response and 201 status code with created visitante', async () => {
       const mockVisitante = { 
-		nome_completo: "Joao da Silva",
-		rg: "112223334",
+        nome_completo: "Joao da Silva",
+        rg: "112223334",
         id: "4b084ce6-a1c0-46fb-b233-f3621caee577",
-		created_at: "2023-10-07T15:39:29.849Z",
-		updated_at: "2023-10-07T15:39:29.849Z"
+        created_at: "2023-10-07T15:39:29.849Z",
+        updated_at: "2023-10-07T15:39:29.849Z"
       };
       const mockBody = { nome_completo: 'Joao da Silva', rg: '112223334' };
       (CreateVisitanteService.prototype.execute as jest.Mock).mockResolvedValueOnce(mockVisitante);
@@ -82,6 +85,7 @@ describe('VisitantesController', () => {
 
       await visitantesController.create(mockReq as Request, mockRes as Response);
 
+      expect(mockStatus).toHaveBeenCalledWith(201);
       expect(mockJson).toHaveBeenCalledWith(mockVisitante);
     });
   });
@@ -89,11 +93,11 @@ describe('VisitantesController', () => {
   describe('update', () => {
     it('should return a json response with updated visitante', async () => {
       const mockVisitante = { 
-		nome_completo: "Jose da Silva",
-		rg: "112223334",
+        nome_completo: "Jose da Silva",
+        rg: "112223334",
         id: "4b084ce6-a1c0-46fb-b233-f3621caee577",
-		created_at: "2023-10-07T15:39:29.849Z",
-		updated_at: "2023-10-07T15:39:29.849Z"
+        created_at: "2023-10-07T15:39:29.849Z",
+        updated_at: "2023-10-07T15:39:29.849Z"
       };
       const mockParams = { id: '4b084ce6-a1c0-46fb-b233-f3621caee577' };
       const mockBody = { nome_completo: 'Jose da Silva', rg: '112223334' };

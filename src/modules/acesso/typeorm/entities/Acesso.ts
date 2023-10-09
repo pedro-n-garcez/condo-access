@@ -10,7 +10,7 @@ import {
 
 import Condominio from '../../../../modules/condominios/typeorm/entities/Condominio';
 import Unidade from '../../../../modules/unidades/typeorm/entities/Unidade';
-import Visitante from '../../../../modules/visitantes/typeorm/entities/Visitante';
+import Visitante from '../../../visitantes/typeorm/entities/Visitante';
   
   @Entity('acessos')
   class Acesso {
