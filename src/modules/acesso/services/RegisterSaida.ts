@@ -16,7 +16,11 @@ class RegistrarSaidaService {
       throw new AppError('Este acesso nao existe');
     }
 
-    acesso.ja_saiu = true;
+    if(acesso.ja_saiu){
+      throw new AppError('Este visitante ja saiu do condominio');
+    } else {
+      acesso.ja_saiu = true;
+    }
 
     await acessosRepository.save(acesso);
 

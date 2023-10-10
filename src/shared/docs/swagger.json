@@ -1,0 +1,330 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Condo-Access API",
+        "description": "API de controle de acesso de visitantes para condominios",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ],
+    "paths": {
+        "/visitantes": {
+            "post": {
+                "summary": "Cadastro de visitante",
+                "description": "Endpoint para cadastrar um novo visitante",
+                "tags": ["Visitantes"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome_completo": {
+                                        "type": "string"
+                                    },
+                                    "rg": {
+                                        "type": "string"
+                                    }                                   
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Ja existe um visitante com o RG fornecido"
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Visitante"                                   
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Lista de visitantes",
+                "description": "Endpoint para listar todos os visitantes cadastrados",
+                "tags": ["Visitantes"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Visitante"
+                                    }                           
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/visitantes/:id": {
+            "put": {
+                "summary": "Atualizacao de visitante",
+                "description": "Endpoint para atualizar um visitante ja existente",
+                "tags": ["Visitantes"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do visitante (UUID) cadastrado",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome_completo": {
+                                        "type": "string"
+                                    },
+                                    "rg": {
+                                        "type": "string"
+                                    }                                   
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Visitante nao encontrado, Ja existe outro visitante com o RG fornecido"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Visitante"                                   
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Mostrar visitante",
+                "description": "Endpoint para mostrar um visitante pelo ID",
+                "tags": ["Visitantes"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do visitante (UUID) cadastrado",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Visitante nao encontrado"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Visitante"                 
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Deletar visitante",
+                "description": "Endpoint para deletar um visitante cadastrado",
+                "tags": ["Visitantes"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do visitante (UUID) cadastrado",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Visitante nao encontrado"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": []
+                        }
+                    }
+                }
+            }
+        },
+        "/acessos/entrada": {
+            "post": {
+                "summary": "Registro de entrada de visitante",
+                "description": "Endpoint para registrar a entrada de um visitante cadastrado",
+                "tags": ["Acessos"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "rg": {
+                                        "type": "string"
+                                    },
+                                    "unidade_id": {
+                                        "type": "number"
+                                    },
+                                    "condominio_id": {
+                                        "type": "number"
+                                    }             
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Este visitante nao esta cadastrado, Esta unidade nao existe no condominio providenciado"
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Acesso"                                   
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/acessos": {
+            "get": {
+                "summary": "Lista de acessos",
+                "description": "Endpoint para listar todos os acessos ja efeituados",
+                "tags": ["Acessos"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Acesso"
+                                    }                           
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/acessos/:id/saida": {
+            "patch": {
+                "summary": "Registro de saida de visitante",
+                "description": "Endpoint para registrar a saida do visitante do condominio",
+                "tags": ["Acessos"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do acesso (UUID) cadastrado",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Este acesso nao existe, Este usuario ja saiu do condominio"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Acesso"                                   
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Visitante": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "nome_completo": {
+                        "type": "string"
+                    },
+                    "rg": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "type": "string"
+                    },
+                    "updated_at": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Acesso": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "ja_saiu": {
+                        "type": "boolean"
+                    },
+                    "data_entrada": {
+                        "type": "string"
+                    },
+                    "data_saida": {
+                        "type": "string"
+                    },
+                    "visitante": {
+                        "$ref": "#/components/schemas/Visitante"
+                    },
+                    "condominio": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "unidade": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
