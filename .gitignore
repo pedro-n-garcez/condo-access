@@ -1,4 +1,5 @@
 .docker/dbdata
 node_modules/
 build/
+coverage/
 dist
