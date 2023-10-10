@@ -43,4 +43,7 @@ Caso necessário, o container do Docker permite a visualização e manipulação
 O login é ```admin@pgadmin.com.br``` e a senha é ```admin```. Para adicionar um novo servidor, o host é ```db```, o usuário ```postgres``` e a senha ```123```.
 
 ## Documentação
-Após rodar a API com o Docker Compose, a documentação estará disponível em ```localhost:3000/docs```. 
+Após rodar a API com o Docker Compose, a documentação estará disponível em ```localhost:3000/docs```.
+
+## Dúvidas
+Qualquer problema ou dúvida com o projeto, estarei à disposição para responder. Meu email é pedronogarcez@gmail.com.
