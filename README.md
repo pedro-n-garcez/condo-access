@@ -32,9 +32,13 @@ Vale lembrar que nesta API, só é possivel registrar o acesso de entrada de um 
 ## Instruções para rodar
 ### Em ambiente Linux (WSL2):
 Após baixar/clonar o repositório, entrar no diretório do projeto e rodar no terminal o seguinte comando:
+
 ```chmod +x .docker/entrypoint.sh```
+
 Em seguida, rodar o container de Docker do projeto usando:
+
 ```sudo docker-compose up```
+
 Quando aparecer no terminal a string ```Servidor iniciado na porta 3000```, é porque a API já está rodando no servidor local.
 
 ## Manipulação do banco usando pgAdmin
