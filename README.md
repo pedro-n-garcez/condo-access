@@ -1,8 +1,6 @@
 # Condo Access API
 API de controle de acesso de visitantes em condomínios.
 
-Projeto concebido seguindo as orientações do Teste Técnico de Dev da Superlógica Tecnologias.
-
 ## Overview
 ### Tecnologias e Frameworks
 A API NodeJS foi escrita em TypeScript, usando Express. O banco de dados é PostgreSQL, usando a biblioteca TypeORM como ORM. Os testes automatizados foram feitos com Jest e a validação de dados com Celebrate, que usa o Joi.
@@ -48,6 +46,3 @@ O login é ```admin@pgadmin.com.br``` e a senha é ```admin```. Para adicionar u
 
 ## Documentação
 Após rodar a API com o Docker Compose, a documentação estará disponível em ```localhost:3000/docs```.
-
-## Dúvidas
-Qualquer problema ou dúvida com o projeto, estarei à disposição para responder. Meu email é pedronogarcez@gmail.com.
